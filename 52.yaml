@@ -1,0 +1,23 @@
+
+- name: Ensure proper permissions on application directories and files
+  hosts: all
+  become: true
+  gather_facts: true
+
+  tasks:
+    - name: Set directory permissions
+      file:
+        path: /path/to/application_directory
+        state: directory
+        owner: root
+        group: root
+        mode: "0755"
+
+    - name: Set file permissions
+      file:
+        path: /path/to/application_file
+        state: touch
+        owner: root
+        group: root
+        mode: "0644"
+

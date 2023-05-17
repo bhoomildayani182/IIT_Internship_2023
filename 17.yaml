@@ -1,0 +1,15 @@
+- name: Ensure users' dot files are not group or world writable
+  hosts: all
+  become: true
+  tasks:
+    - name: Set correct file permissions for dot files
+      file:
+        path: "/home/{{ item }}/"
+        state: directory
+        mode: "0755"
+        recurse: yes
+      with_items:
+        - asc
+        - wild_one
+        - ashishkadian239
+

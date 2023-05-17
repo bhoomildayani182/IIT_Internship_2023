@@ -1,0 +1,16 @@
+- name: World writable directories
+  hosts: all
+  become: true
+
+  tasks:
+
+    - name: Find world writable directories
+      command: find / -perm -0002 -a ! -perm 1000 -type d -print
+      register: output
+      changed_when: false
+
+    - name: Set sticky bit on found directories
+      file:
+        path: "{{ item }}"
+        mode: "+t"
+      loop: "{{ output.stdout_lines }}"

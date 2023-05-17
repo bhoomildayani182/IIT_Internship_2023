@@ -1,0 +1,17 @@
+- name: Configure AIDE
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Install AIDE package
+      apt:
+        name: aide
+        state: present
+
+    - name: Configure AIDE to run daily
+      cron:
+        name: Run AIDE daily
+        minute: 0
+        hour: 0
+        job: "/usr/sbin/aide --check"
+

@@ -1,0 +1,17 @@
+---
+- hosts: all
+  become: true
+  vars:
+    new_users:
+      - name: asc
+        password: "{{ 'password' | password_hash('sha512') }}"
+      - name: wild_one
+        password: "{{ 'password' | password_hash('sha512') }}"
+  tasks:
+    - name: Create new user accounts
+      user:
+        name: "{{ item.name }}"
+        password: "{{ item.password }}"
+        state: present
+      with_items: "{{ new_users }}"
+

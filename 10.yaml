@@ -1,0 +1,45 @@
+- name: Ensure OpenSSH is configured securely
+  hosts: all
+  become: true
+
+  tasks:
+  - name: Set SSH protocol to 2
+    lineinfile:
+      path: /etc/ssh/sshd_config
+      regexp: '^#?Protocol'
+      line: 'Protocol 2'
+      state: present
+      backup: yes
+
+  - name: Set SSH log level to INFO
+    lineinfile:
+      path: /etc/ssh/sshd_config
+      regexp: '^#?LogLevel'
+      line: 'LogLevel INFO'
+      state: present
+      backup: yes
+
+  - name: Disable empty passwords
+    lineinfile:
+      path: /etc/ssh/sshd_config
+      regexp: '^#?PermitEmptyPasswords'
+      line: 'PermitEmptyPasswords no'
+      state: present
+      backup: yes
+
+  - name: Disable root login
+    lineinfile:
+      path: /etc/ssh/sshd_config
+      regexp: '^#?PermitRootLogin'
+      line: 'PermitRootLogin no'
+      state: present
+      backup: yes
+
+  - name: Disable SSH banner
+    lineinfile:
+      path: /etc/ssh/sshd_config
+      regexp: '^#?Banner'
+      line: 'Banner none'
+      state: present
+      backup: yes
+

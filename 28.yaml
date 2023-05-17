@@ -1,0 +1,10 @@
+- hosts: all
+  become: true
+
+  tasks:
+    - name: Set Document Root permissions
+      file:
+        path: /var/www/html
+        state: directory
+        mode: "0755"
+

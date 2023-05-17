@@ -1,0 +1,8 @@
+- hosts: all
+  become: true
+  tasks:
+    - name: Ensure HTTP Proxy Server for nginx is disabled
+      systemd:
+        name: nginx
+        enabled: false
+

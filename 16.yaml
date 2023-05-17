@@ -1,0 +1,19 @@
+- name: Enforce strong and periodical user password changes
+  hosts: all
+  become: true
+  
+  tasks:
+    - name: Set strong password for asc user
+      user:
+        name: asc
+        password: "{{ 'MyStrongPassword123!' | password_hash('sha512', 'mysalt') }}"
+        update_password: on_create
+        expires: 90
+
+    - name: Set strong password for wild_one user
+      user:
+        name: wild_one
+        password: "{{ 'AnotherStrongPassword456#' | password_hash('sha512', 'mysalt') }}"
+        update_password: on_create
+        expires: 90
+

@@ -1,0 +1,26 @@
+---
+- name: Ensure unnecessary modules are disabled on nginx
+  hosts: all
+  become: true
+
+  vars:
+    disabled_modules:
+      - http_browser_module
+      - http_geo_module
+      - http_uwsgi_module
+
+  tasks:
+    - name: Disable unnecessary modules in nginx configuration
+      lineinfile:
+        path: /etc/nginx/nginx.conf
+        regexp: '^load_module.*({{ item }}).*$'
+        state: absent
+      with_items: "{{ disabled_modules }}"
+      notify: restart nginx
+
+  handlers:
+    - name: restart nginx
+      service:
+        name: nginx
+        state: restarted
+

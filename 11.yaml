@@ -1,0 +1,26 @@
+- name: Disable unused services
+  hosts: all
+  become: true
+
+  vars:
+    unused_services:
+      - cups
+      - xinetd
+      - apache2
+      - mysql
+      - postgresql
+      - vsftpd
+      - telnet
+      - ssh
+      - bind9
+      - postfix
+      - samba
+
+  tasks:
+  - name: Disable unused services
+    systemd:
+      name: "{{ item }}"
+      enabled: false
+      state: stopped
+    with_items: "{{ unused_services }}"
+

@@ -1,0 +1,16 @@
+- name: Find unowned files and directories
+  hosts: all
+  become: true
+  tasks:
+  - name: Find unowned files and directories in /path/to/directory
+    find:
+      paths: /
+      file_type: file
+      get_checksum: true
+    register: unowned_files
+  - name: Remove unowned files and directories
+    file:
+      path: "{{ item.path }}"
+      state: absent
+    loop: "{{ unowned_files.files }}"
+

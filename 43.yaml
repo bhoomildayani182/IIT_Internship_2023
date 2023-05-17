@@ -1,0 +1,38 @@
+
+- name: Update applications and plugins with security patches
+  hosts: all
+  become: yes
+  environment:
+    ansible_tmpdir: /path/to/alternative/tmpdir
+  tasks:
+    - name: Update package cache
+      apt:
+        update_cache: yes
+      when: ansible_os_family == 'Debian'
+
+    - name: Update packages on Debian-based systems
+      apt:
+        name: '*'
+        state: latest
+        update_cache: yes
+      when: ansible_os_family == 'Debian'
+
+    - name: Update packages on Red Hat-based systems
+      yum:
+        name: '*'
+        state: latest
+      when: ansible_os_family == 'RedHat'
+
+    - name: Update packages on SUSE-based systems
+      zypper:
+        name: '*'
+        state: latest
+      when: ansible_os_family == 'Suse'
+
+    - name: Update packages on Arch Linux
+      pacman:
+        name: '*'
+        state: latest
+      when: ansible_os_family == 'Archlinux'
+
+

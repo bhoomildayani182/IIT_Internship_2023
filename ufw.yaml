@@ -1,0 +1,11 @@
+- name: Allow incoming traffic for established connections
+  hosts: all
+  become: true
+
+  tasks:
+  - name: Allow established connections
+    community.general.ufw:
+      direction: incoming
+      rule: allow
+      state: established
+

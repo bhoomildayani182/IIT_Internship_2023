@@ -1,0 +1,26 @@
+- name: Configure NTP
+  hosts: all
+  become: true
+  vars:
+    ntp_server: ntp.iitb.ac.in
+
+  tasks:
+    - name: Install NTP package
+      apt:
+        name: ntp
+        state: present
+
+    - name: Configure NTP server
+      lineinfile:
+        dest: /etc/ntp.conf
+        regexp: '^server'
+        line: 'server {{ ntp_server }}'
+      notify:
+        - restart ntpd
+
+  handlers:
+    - name: restart ntpd
+      service:
+        name: ntp
+        state: restarted
+

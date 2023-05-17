@@ -1,0 +1,21 @@
+---
+- name: Install and enable mod_security for Apache
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Install Apache web server
+      apt:
+        name: apache2
+        state: present
+
+    - name: Install mod_security
+      apt:
+        name: libapache2-mod-security2
+        state: present
+
+    - name: Enable mod_security
+      apache2_module:
+        name: security2
+        state: present
+

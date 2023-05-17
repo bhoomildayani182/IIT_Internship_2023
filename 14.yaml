@@ -1,0 +1,19 @@
+---
+- name: Ensure crond is restricted to authorized users
+  hosts: all
+  become: true
+  vars:
+    cron_allow_users:
+      - root
+      - alice
+      - ashishkadian239
+      - bhoomildayani182
+  tasks:
+    - name: Create /etc/cron.d/cron.allow file
+      copy:
+        dest: /etc/cron.d/cron.allow
+        content: |
+          {{ item }}
+        mode: '0644'
+      loop: "{{ cron_allow_users }}"
+
