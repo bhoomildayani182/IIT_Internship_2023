@@ -1,0 +1,13 @@
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
+- name: Install MySQL server and client packages
+  apt:
+    name:
+      - mysql-server
+      - mysql-client
+      - python3-mysqldb
+      - libmysqlclient-dev
+    state: present
+

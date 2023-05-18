@@ -1,0 +1,4 @@
+---
+mysql_daemon_user: asc_user
+mysql_daemon_password: mypassword
+# vars file for Database_Server_Hardening

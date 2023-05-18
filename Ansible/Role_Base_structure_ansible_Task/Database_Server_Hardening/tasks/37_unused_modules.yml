@@ -1,0 +1,6 @@
+- name: Remove unused MySQL modules
+  apt:
+    autoremove: yes
+  notify:
+    - restart mysql
+
