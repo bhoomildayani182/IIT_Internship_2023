@@ -1,0 +1,15 @@
+- name: Remove unnecessary MySQL modules
+  hosts: all
+  become: true
+  tasks:
+    - name: Remove unused MySQL modules
+      apt:
+        autoremove: yes
+      notify:
+        - restart mysql
+  handlers:
+    - name: restart mysql
+      service:
+        name: mysql.service
+        state: restarted
+

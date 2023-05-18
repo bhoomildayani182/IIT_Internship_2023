@@ -7,7 +7,6 @@
       - root
       - alice
       - ashishkadian239
-      - bhoomildayani182
   tasks:
     - name: Create /etc/cron.d/cron.allow file
       copy:

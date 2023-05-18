@@ -1,0 +1,8 @@
+- name: Ensure that web server syslog facility is configured
+  hosts: all
+  tasks:
+    - name: Set syslog facility to local6
+      community.general.syslogger:
+        msg: "Setting syslog facility to local6"
+        facility: "local6"
+

@@ -1,0 +1,17 @@
+- name: Remove MySQL default database and users
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Remove MySQL anonymous users
+      mysql_user:
+        name: ''
+        host: localhost
+        state: absent
+        login_unix_socket: /run/mysqld/mysqld.sock
+
+    - name: Remove MySQL test database
+      mysql_db:
+        name: test
+        state: absent
+

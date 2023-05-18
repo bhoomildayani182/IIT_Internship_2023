@@ -16,7 +16,7 @@
       state: started
 
   - name: Copy custom logrotate configuration for rsyslog
-    copy:	
+    copy:
       src: /etc/rsyslog.conf
       dest: /etc/logrotate.d/rsyslog
       owner: root

@@ -1,0 +1,15 @@
+- name: Install MySQL server and create a dedicated user for the daemon
+  hosts: all
+  become: true
+  vars:
+    mysql_daemon_user: mysql
+    mysql_daemon_password: mypassword
+
+  tasks:
+    - name: Create a dedicated user for the MySQL daemon
+      mysql_user:
+        name: "{{ mysql_daemon_user }}"
+        password: "{{ mysql_daemon_password }}"
+        priv: '*.*:USAGE'
+        state: present
+

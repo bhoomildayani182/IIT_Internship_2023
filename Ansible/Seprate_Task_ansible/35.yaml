@@ -1,0 +1,19 @@
+- hosts: all
+  become: true
+  tasks:
+  - name: Disable TLSv1.0 and TLSv1.1 Protocols
+    lineinfile:
+      path: /etc/nginx/nginx.conf
+      regexp: '(ssl_protocols\s+TLSv1)(.*;)'
+      line: 'ssl_protocols TLSv1.2;'
+  - name: Disable Weak SSL/TLS Ciphers
+    lineinfile:
+      path: /etc/nginx/nginx.conf
+      regexp: '(ssl_ciphers\s+.*)'
+      line: 'ssl_ciphers HIGH:!aNULL:!MD5:!3DES:!CAMELLIA:!AES128:!AES256:!SHA1:!DHE-RSA-AES256-SHA:!ECDHE-RSA-AES256-SHA:!DHE-RSA-AES128-SHA:!ECDHE-RSA-AES128-SHA:!DHE-RSA-AES256-GCM-SHA384:!DHE-RSA-AES256-CCM:!DHE-RSA-AES128-GCM-SHA256:!DHE-RSA-AES128-CCM:!ECDHE-RSA-AES256-GCM-SHA384:!ECDHE-RSA-AES128-GCM-SHA256:!ECDHE-RSA-CHACHA20-POLY1305:!DHE-RSA-CHACHA20-POLY1305;'
+  - name: Disable Weak SSL Protocols
+    lineinfile:
+      path: /etc/nginx/nginx.conf
+      regexp: '(ssl_prefer_server_ciphers\s+.*)'
+      line: 'ssl_prefer_server_ciphers on;'
+

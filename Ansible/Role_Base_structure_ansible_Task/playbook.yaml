@@ -7,19 +7,8 @@
     - Database_Server_Hardening
     - Web_Application_Hardening_Activities
   tasks:
-    # - include_tasks: /home/ashishkadian239/iitb/Ansible/OS_Hardening/tasks/update.yml
-    # - include_tasks: /home/ashishkadian239/iitb/Ansible/OS_Hardening/tasks/*.yml
-    # - include_tasks: /home/ashishkadian239/iitb/Ansible/OS_Hardening/tasks/kernel.yml
-    # - include_tasks: /home/ashishkadian239/iitb/Ansible/OS_Hardening/tasks/openssh.yml
-    # - include_tasks: /home/ashishkadian239/iitb/Ansible/OS_Hardening/tasks/unused_service.yml
-    # - include_tasks: /home/ashishkadian239/iitb/Ansible/OS_Hardening/tasks/unused_network.yml
-    # - include_tasks: /home/ashishkadian239/iitb/Ansible/OS_Hardening/tasks/NTP.yml
-    # - include_tasks: /home/ashishkadian239/iitb/Ansible/OS_Hardening/tasks/crond.yml
-    # - include_tasks: /home/ashishkadian239/iitb/Ansible/OS_Hardening/tasks/15_account.yml
-    # - include_tasks: /home/ashishkadian239/iitb/Ansible/OS_Hardening/tasks/16_strong.yml
-    # - include_tasks: /home/ashishkadian239/iitb/Ansible/OS_Hardening/tasks/17_perm.yml
-    # - include_tasks: /home/ashishkadian239/iitb/Ansible/OS_Hardening/tasks/18_sudo.yml
-    # - include_tasks: /home/ashishkadian239/iitb/Ansible/OS_Hardening/tasks/19_world.yml
-    # - include_tasks: /home/ashishkadian239/iitb/Ansible/OS_Hardening/tasks/20_unowned.yml
-    - include_tasks: "Web_Application_Hardening_Activities/tasks/43_3rd_party.yml"
+    - include_tasks: "OS_Hardening/tasks/*.yml"
+    - include_tasks: "Web_Server_Application_Hardening/tasks/*.yml"
+    - include_tasks: "Database_Server_Hardening/tasks/*.yml"
+    - include_tasks: "Web_Application_Hardening_Activities/tasks/*.yml"
 

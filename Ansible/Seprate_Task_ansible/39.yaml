@@ -1,0 +1,19 @@
+- name: Ensure MySQL server is not started with safe mode
+  hosts: all
+  become: true
+  tasks:
+    - name: Check MySQL safe mode status
+      command: mysql --defaults-file=/etc/mysql/my.cnf --verbose --help | grep -i 'safe mode'
+      register: safe_mode_output
+      ignore_errors: true
+
+    - name: Disable MySQL safe mode
+      command: sed -i 's/^safe-mode.*$/safe-mode=0/g' /etc/mysql/my.cnf
+      when: safe_mode_output.stdout_lines | length > 0
+
+    - name: Restart MySQL service
+      service:
+        name: mysql
+        state: restarted
+      when: safe_mode_output.stdout_lines | length > 0
+

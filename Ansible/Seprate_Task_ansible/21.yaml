@@ -1,3 +1,4 @@
+---
 - name: World writable directories
   hosts: all
   become: true
