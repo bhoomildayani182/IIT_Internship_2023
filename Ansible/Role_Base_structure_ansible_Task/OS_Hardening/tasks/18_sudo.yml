@@ -1,0 +1,13 @@
+---
+- name: Ensure sudo package is installed
+  apt:
+    name: sudo
+    state: present
+
+- name: Ensure sudoers file syntax is correct
+  command: sudo visudo -c -f /etc/sudoers
+  register: sudoers_syntax
+  changed_when: false
+  failed_when: "'parse errors' in sudoers_syntax.stdout"
+  become: true
+

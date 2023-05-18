@@ -1,0 +1,24 @@
+- name: Set default firewall policy to deny
+  ufw:
+    policy: deny
+
+- name: Allow incoming traffic on port 22 (SSH)
+  ufw:
+    rule: allow
+    port: 22
+
+- name: Allow incoming traffic on port 80 (HTTP)
+  ufw:
+    rule: allow
+    port: 80
+
+- name: Allow incoming traffic on port 443 (HTTPS)
+  ufw:
+    rule: allow
+    port: 443
+
+- name: Allow outbound traffic
+  ufw:
+    direction: outgoing
+    policy: allow
+
