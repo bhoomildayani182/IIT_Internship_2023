@@ -1,0 +1,23 @@
+---
+# handlers file for Web_Application_Hardening_Activities
+#
+- name: Restart Apache
+  service:
+    name: apache2
+    state: restarted
+
+- name: Restart MySQL
+  service:
+    name: mysql
+    state: restarted
+
+- name: restart apache
+  service:
+    name: httpd
+    state: restarted
+
+- name: Restart Apache
+  service:
+    name: apache2
+    state: restarted
+

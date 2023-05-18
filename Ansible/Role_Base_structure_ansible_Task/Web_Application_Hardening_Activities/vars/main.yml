@@ -1,0 +1,5 @@
+---
+# vars file for Web_Application_Hardening_Activities
+
+api_host: your_api_hostname
+web_server_config_file: /path/to/web_server_configuration_file
