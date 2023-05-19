@@ -1,0 +1,28 @@
+- name: My Playbook
+  hosts: all
+  become: true
+  roles:
+    - Web_Application_Hardening_Activities
+    
+  tasks:
+    
+    - include_tasks: "Web_Application_Hardening_Activities/tasks/43_3rd_party.yml"
+    - include_tasks: "Web_Application_Hardening_Activities/tasks/44_client_server.yml"
+    - include_tasks: "Web_Application_Hardening_Activities/tasks/45_HTTP_Sec.yml"
+    - include_tasks: "Web_Application_Hardening_Activities/tasks/46_error_hand.yml"
+    - include_tasks: "Web_Application_Hardening_Activities/tasks/47_plain_pass.yml"
+    - include_tasks: "Web_Application_Hardening_Activities/tasks/48_con_file_exists.yml"
+    - include_tasks: "Web_Application_Hardening_Activities/tasks/49_encrypt_channel.yml"
+    - include_tasks: "Web_Application_Hardening_Activities/tasks/50_install_pac.yml"
+    - include_tasks: "Web_Application_Hardening_Activities/tasks/51_remove_version.yml"
+    - include_tasks: "Web_Application_Hardening_Activities/tasks/52_permision.yml"
+    - include_tasks: "Web_Application_Hardening_Activities/tasks/53_find_pub_module.yml"
+    - include_tasks: "Web_Application_Hardening_Activities/tasks/54_diseble_HTTP.yml"
+    - include_tasks: "Web_Application_Hardening_Activities/tasks/55_dire_disable.yml"
+    - include_tasks: "Web_Application_Hardening_Activities/tasks/56_Traffic.yml"
+    - include_tasks: "Web_Application_Hardening_Activities/tasks/57_non_root_user.yml"
+    - include_tasks: "Web_Application_Hardening_Activities/tasks/58_CAPTCHA.yml"
+    - include_tasks: "Web_Application_Hardening_Activities/tasks/59_email.yml"
+    
+
+

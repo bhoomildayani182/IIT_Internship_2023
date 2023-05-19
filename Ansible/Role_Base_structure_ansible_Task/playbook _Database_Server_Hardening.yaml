@@ -1,0 +1,21 @@
+- name: My Playbook
+  hosts: all
+  become: true
+  roles:
+
+    - Database_Server_Hardening
+    
+  tasks:
+    
+    - include_tasks: "Database_Server_Hardening/tasks/36_database_server.yml"
+    - include_tasks: "Database_Server_Hardening/tasks/37_unused_modules.yml"
+    - include_tasks: "Database_Server_Hardening/tasks/38_dedicated_user.yml"
+    - include_tasks: "Database_Server_Hardening/tasks/39_safe_mode.yml"
+    - include_tasks: "Database_Server_Hardening/tasks/40_anonymous_user.yml"
+    - include_tasks: "Database_Server_Hardening/tasks/41_Wildcard_hostnames.yml"
+    - include_tasks: "Database_Server_Hardening/tasks/"42_history_disable.yml"
+    
+
+    
+
+
