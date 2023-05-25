@@ -1,9 +1,0 @@
-name: no user with wild hostname
-hosts: all
-become: true
-tasks:
-        - name: remove wildcard user
-          mysql_user:
-                  name: all_hosts
-                  hostname:
-                  state:  

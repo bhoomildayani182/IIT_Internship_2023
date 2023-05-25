@@ -1,0 +1,22 @@
+- name: Check if Apache configuration file exists
+  stat:
+    path: /etc/httpd/conf/httpd.conf
+  register: conf_file
+
+- name: Copy Apache configuration template
+  template:
+    src: templates/httpd.conf.j2
+    dest: /etc/httpd/conf/httpd.conf
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - restart apache
+
+- name: Disable application directory listing
+  lineinfile:
+    path: /etc/httpd/conf/httpd.conf
+    regex: "^Options"
+    line: "Options -Indexes"
+  notify:
+    - restart apache

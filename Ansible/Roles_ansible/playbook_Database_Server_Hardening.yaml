@@ -13,7 +13,7 @@
     - include_tasks: "Database_Server_Hardening/tasks/39_safe_mode.yml"
     - include_tasks: "Database_Server_Hardening/tasks/40_anonymous_user.yml"
     - include_tasks: "Database_Server_Hardening/tasks/41_Wildcard_hostnames.yml"
-    - include_tasks: "Database_Server_Hardening/tasks/"42_history_disable.yml"
+    - include_tasks: "Database_Server_Hardening/tasks/42_history_disable.yml"
     
 
     

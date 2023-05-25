@@ -18,6 +18,6 @@
     - include_tasks: "Web_Server_Application_Hardening/tasks/33_remove_default.yml"
     - include_tasks: "Web_Server_Application_Hardening/tasks/34_syslog.yml"
     - include_tasks: "Web_Server_Application_Hardening/tasks/35_disable_protocol.yml"
-    
+ #up to date
 
 

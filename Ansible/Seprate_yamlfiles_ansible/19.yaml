@@ -1,4 +1,4 @@
----
+
 - name: World writable directories
   hosts: all
   become: true
@@ -10,8 +10,10 @@
       register: output
       changed_when: false
 
-    - name: Set sticky bit on found directories
+    - name: Remove world writable directories
       file:
         path: "{{ item }}"
-        mode: "+t"
-      loop: "{{ output.stdout_lines }}"
+        state: absent
+      with_items: "{{ output.stdout_lines }}"
+      when: item is not none
+
