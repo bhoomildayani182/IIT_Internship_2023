@@ -1,9 +1,30 @@
-name: no user with wild hostname
-hosts: all
-become: true
-tasks:
-        - name: remove wildcard user
-          mysql_user:
-                  name: all_hosts
-                  hostname:
-                  state:  
+
+- name: Ensure no users have Wildcard hostnames on the database server
+  hosts: al
+  tasks:
+    - name: Retrieve MySQL users
+      mysql_db:
+        login_user: your_db_admin_user
+        login_password: your_db_admin_password
+        login_host: localhost
+        login_port: 3306
+        db: mysql
+        state: dump
+      register: mysql_db_dump
+
+    - name: Parse MySQL users from the dump
+      set_fact:
+        mysql_users: "{{ mysql_db_dump.dump }}"
+      run_once: true
+
+    - name: Remove users with Wildcard hostnames
+      mysql_user:
+        login_user: your_db_admin_user
+        login_password: your_db_admin_password
+        login_host: localhost
+        login_port: 3306
+        name: "{{ item }}"
+        state: absent
+      loop: "{{ mysql_users.split('\n') }}"
+      when: "'@%' in item"
+

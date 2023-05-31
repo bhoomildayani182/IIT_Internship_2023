@@ -47,9 +47,4 @@
         mode: 0644
       become: true
 
-    - name: Restart third-party application service
-      service:
-        name: third_party_application_service
-        state: restarted
-      become: true
-
+  

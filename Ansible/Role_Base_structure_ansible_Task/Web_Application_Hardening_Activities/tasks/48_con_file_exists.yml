@@ -21,9 +21,5 @@
           </IfModule>
       </Directory>
   when: apache_config.stat.exists
-
-- name: Restart Apache service
-  service:
-    name: httpd
-    state: restarted
+  notify:  restart Apache2
 
