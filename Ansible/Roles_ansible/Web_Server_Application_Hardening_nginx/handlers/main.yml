@@ -1,6 +1,0 @@
----
-- name: restart nginx
-  service:
-    name: nginx
-    state: restarted
-# handlers file for Web_Server_Application_Hardening

@@ -1,5 +1,0 @@
-- name: Remove default content directory
-  file:
-    path: /var/www/html
-    state: absent
-

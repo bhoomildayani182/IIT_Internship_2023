@@ -1,5 +1,0 @@
----
-- hosts: localhost
-  remote_user: root
-  roles:
-    - Web_Application_Hardening_Activities

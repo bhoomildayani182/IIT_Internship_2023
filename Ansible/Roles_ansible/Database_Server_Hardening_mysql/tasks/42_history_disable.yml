@@ -1,8 +1,0 @@
-
-- name: Disable command history
-  lineinfile:
-    path: /etc/mysql/mysql.conf.d/mysqld.cnf
-    regexp: '^general_log\s*='
-    line: 'general_log = 0'
-    backup: yes
-

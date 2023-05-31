@@ -1,7 +1,0 @@
-- name: Create a dedicated user for the MySQL daemon
-  mysql_user:
-    name: "{{ mysql_daemon_user }}"
-    password: "{{ mysql_daemon_password }}"
-    priv: '*.*:USAGE'
-    state: present
-

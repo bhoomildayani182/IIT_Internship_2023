@@ -1,6 +1,0 @@
----
-disabled_modules:
-      - http_browser_module
-      - http_geo_module
-      - http_uwsgi_module
-# vars file for Web_Server_Application_Hardening

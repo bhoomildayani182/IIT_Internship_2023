@@ -1,7 +1,0 @@
----
-- name: restart mysql
-  service:
-    name: mysql.service
-    state: restarted
-
-# handlers file for Database_Server_Hardening

@@ -1,8 +1,0 @@
-- name: Replace server_tokens line
-  replace:
-    path: /etc/nginx/nginx.conf
-    regexp: '^( *)server_tokens .*;$'
-    replace: '\1server_tokens off;'
-  notify:
-    - restart nginx
-
