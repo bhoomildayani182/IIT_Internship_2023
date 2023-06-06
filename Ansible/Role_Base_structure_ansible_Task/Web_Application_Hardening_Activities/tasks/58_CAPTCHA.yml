@@ -1,0 +1,29 @@
+- name: Install required packages
+  apt:
+    name:
+      - libapache2-mod-security2
+      - libapache2-mod-evasive
+    state: present
+  when: ansible_distribution == 'Ubuntu'
+
+- name: Configure Apache
+  blockinfile:
+    dest: /etc/apache2/conf-available/captcha.conf
+    block: |
+      <IfModule mod_security2.c>
+        <LocationMatch "/publicpages/.*">
+          SecRule REQUEST_METHOD "@streq POST" "id:'1000',phase:1,pass,nolog,t:none,setvar:tx.captcha_required=1"
+          SecRule &TX:CAPTCHA_REQUIRED "@eq 1" "id:'1001',phase:2,pass,nolog,t:none,ctl:requestBodyProcessor=modsecurity-captcha"
+        </LocationMatch>
+      </IfModule>
+    state: present
+  notify:
+    - Restart Apache
+
+- name: Enable the CAPTCHA configuration
+  command: a2enconf captcha
+  args:
+    creates: /etc/apache2/conf-enabled/captcha.conf
+  notify:
+    - Restart Apache
+

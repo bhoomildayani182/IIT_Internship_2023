@@ -1,0 +1,25 @@
+- name: Ensure Apache config file exists
+  stat:
+    path: /etc/httpd/conf/httpd.conf
+  register: apache_config
+
+- name: Update Apache config to disable directory traversal
+  blockinfile:
+    path: /etc/httpd/conf/httpd.conf
+    marker: "# {mark} ANSIBLE MANAGED BLOCK - Disable Directory Traversal"
+    block: |
+      <Directory "/var/www/html">
+          Options -Indexes
+          AllowOverride None
+          Require all granted
+          # Disable directory traversal
+          Options -FollowSymLinks -MultiViews
+          <IfModule mod_rewrite.c>
+              RewriteEngine On
+              RewriteCond %{REQUEST_FILENAME} !-f
+              RewriteRule ^(.*)$ /index.php/$1 [L,QSA]
+          </IfModule>
+      </Directory>
+  when: apache_config.stat.exists
+  notify:  restart Apache2
+

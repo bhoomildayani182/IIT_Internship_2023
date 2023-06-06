@@ -1,0 +1,34 @@
+- name: Install logrotate package
+  apt:
+    name: logrotate
+    state: present
+
+- name: Enable and start Auditd service
+  systemd:
+    name: auditd
+    enabled: yes
+    state: started
+
+- name: Enable and start rsyslog service
+  systemd:
+    name: rsyslog
+    enabled: yes
+    state: started
+
+- name: Copy custom logrotate configuration for rsyslog
+  copy:
+    src: /etc/rsyslog.conf
+    dest: /etc/logrotate.d/rsyslog
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: Add cron job for rotating audit.log
+  cron:
+    name: Rotate audit.log daily
+    minute: 0
+    hour: 0
+    day: "*/3"
+    job: /usr/sbin/logrotate /etc/logrotate.d/audit
+    state: present
+

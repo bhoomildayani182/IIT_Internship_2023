@@ -1,0 +1,8 @@
+- name: Disable unnecessary modules in nginx configuration
+  lineinfile:
+    path: /etc/nginx/nginx.conf
+    regexp: '^load_module.*({{ item }}).*$'
+    state: absent
+  with_items: "{{ disabled_modules }}"
+  notify: restart nginx
+

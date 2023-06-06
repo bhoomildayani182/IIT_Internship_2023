@@ -1,0 +1,22 @@
+# vars file for OS_Hardening
+---
+ntp_server: ntp.iitb.ac.in
+unused_services:
+  - apache2
+  - mysql
+  - telnet
+  - ssh
+  - postfix
+  - samba
+
+
+cron_allow_users:
+  - root
+  - alice
+  - ashishkadian239
+
+new_users:
+  - name: asc
+    password: "{{ 'password' | password_hash('sha512') }}"
+  - name: wild_one
+    password: "{{ 'password' | password_hash('sha512') }}"

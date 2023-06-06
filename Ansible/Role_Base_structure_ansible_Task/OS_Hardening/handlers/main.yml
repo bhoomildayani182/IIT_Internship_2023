@@ -1,0 +1,21 @@
+---
+- name: Update GRUB
+  command: update-grub
+
+- name: restart ntpd
+  service:
+    name: ntp
+    state: restarted
+
+- name: restart fail2ban
+  service:
+    name: fail2ban
+    state: restarted
+
+- name: Restart SSH service
+  service:
+    name: ssh
+    state: restarted
+
+
+# handlers file for OS_Hardening

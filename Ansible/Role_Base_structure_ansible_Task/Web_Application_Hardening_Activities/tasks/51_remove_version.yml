@@ -1,0 +1,17 @@
+- name: Disable or remove application version files
+  find:
+    paths: /path/to/application/directory
+    patterns: '*.version'
+  register: version_files
+
+- name: Disable or remove version files
+  file:
+    path: "{{ item.path }}"
+    state: absent
+  loop: "{{ version_files.files }}"
+  when: item.isreg|default(false)
+
+- name: Reload application after removing version files
+  command: /path/to/application/reload_command
+  when: version_files.files | length > 0
+

@@ -1,0 +1,13 @@
+- name: Install NTP package
+  apt:
+    name: ntp
+    state: present
+
+- name: Configure NTP server
+  lineinfile:
+    dest: /etc/ntp.conf
+    regexp: '^server'
+    line: 'server ntp.iitb.ac.in'
+  notify:
+    - restart ntpd
+

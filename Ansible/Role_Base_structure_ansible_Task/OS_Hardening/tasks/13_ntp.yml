@@ -1,0 +1,16 @@
+- name: Install NTP package
+  apt:
+    name: ntp
+    state: present
+
+- name: Configure NTP server
+  lineinfile:
+    dest: /etc/ntp.conf
+    regexp: '^server'
+    line: 'server {{ ntp_server }}'
+
+- name: Set system date
+  command: date --set "{{ ansible_date_time.date }}"
+  notify:
+    - restart ntpd
+

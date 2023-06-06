@@ -1,0 +1,16 @@
+- name: Set directory permissions
+  file:
+    path: /path/to/application_directory
+    state: directory
+    owner: root
+    group: root
+    mode: "0755"
+
+- name: Set file permissions
+  file:
+    path: /path/to/application_file
+    state: touch
+    owner: root
+    group: root
+    mode: "0644"
+

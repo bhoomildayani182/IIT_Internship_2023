@@ -1,0 +1,31 @@
+- name: Check for Nginx configuration file
+  stat:
+    path: /etc/nginx/nginx.conf
+  register: nginx_conf_file
+
+- name: Check for Nginx configuration include directory
+  stat:
+    path: /etc/nginx/conf.d/
+  register: nginx_conf_dir
+
+- name: Check for Nginx sites-available directory
+  stat:
+    path: /etc/nginx/sites-available/
+  register: nginx_sites_dir
+
+- name: Disable HTTP Trace method in Nginx
+  blockinfile:
+    path: "{{ item }}"
+    block: |
+      # Disable HTTP Trace method
+      if ($request_method = TRACE) {
+          return 405;
+      }
+  loop:
+    - "{{ nginx_conf_file.stat.path }}"
+    - "{{ nginx_conf_dir.stat.path }}"
+    - "{{ nginx_sites_dir.stat.path }}"
+  when: item is defined
+  notify:
+    - restart nginx
+

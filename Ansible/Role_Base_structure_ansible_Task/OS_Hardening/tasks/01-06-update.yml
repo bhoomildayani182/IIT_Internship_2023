@@ -1,0 +1,23 @@
+- name: Update Ubuntu
+  apt:
+    update_cache: yes
+    upgrade: yes
+    autoremove: yes
+
+- name: Disable automounting for CD/DVDs and USBs
+  mount:
+    path: /media
+    src: none
+    fstype: none
+    opts: "noauto"
+    state: present
+    dump: "0"
+    passno: "0"
+
+- name: Ensure that password is set for single user mode
+  lineinfile:
+    path: /etc/default/grub
+    regexp: '^GRUB_CMDLINE_LINUX='
+    line: 'GRUB_CMDLINE_LINUX="single"'
+  notify:
+    - Update GRUB
